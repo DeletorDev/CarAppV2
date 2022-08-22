@@ -10,17 +10,17 @@
 * Create a method to allow you to easily create a new car.
 
 * Create the following cars:
-    - Chevy Corvette 1967 350
-    - Pontiac FireBird 1967 400
-    - Dodge Challenger 1970 427
-    - Ford Pinto 1976 208
-    - AlfaRomeo Tudeli 2000 200
-    - Porche McPorcherson 2015 450
+    - Porche Corcheros 2015 296
     - Pontiac Trans Am 1976 455
     - Chevy Camaro 2022 476
     - Ford Bronco 1985 350
     - Chevy Cavalier 1996 287
-    - Porche 911 1999 327}
+    - Chevy Corvette 1967 350
+    - Pontiac FireBird 1967 400
+    - Dodge Challenger 1970 427
+    - Ford Pinto 1976 208
+    - AlfaRomeo Tudela 2000 200
+    
 
 * Write to console:
     - Which make appears the most?

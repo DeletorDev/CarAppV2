@@ -89,12 +89,9 @@ namespace CarAppV2
             }
         }
 
+        //1) Add a Car
         public static void AddCar()
         {
-            /*
-             * Method to add a car in the car database.
-            */
-
             Console.WriteLine("Method to create a car");
 
             Console.Write("\r\nCar Company: ");
@@ -115,37 +112,7 @@ namespace CarAppV2
             ListCars("All");
         }
 
-        public static void ListCars(string combination)
-        {   /*
-             * Method to retrieve the cars stored in the database.
-             * Combination parameter
-                All = All columns
-                MOY = Model, Year
-                YMOMA = Year, Model, Make
-            */
-
-            var resCars = carList.Select(c => c);
-
-            if (combination == "All")
-                Console.WriteLine("Make \t\t Model \t\t Year \t\t Engine Size");
-            else if (combination == "MOY")
-                Console.WriteLine("Model \t\t Year");
-            else if (combination == "YMOMA")
-                Console.WriteLine("Year \t\t Model \t\t Make");
-
-            foreach (var item in resCars)
-            {
-                if (combination == "All")
-                    Console.WriteLine("{0} \t\t {1} \t\t {2} \t\t {3}", item.Make, item.Model, item.Year, item.EngineSize);
-                else if (combination == "MOY")
-                    Console.WriteLine("{0} \t\t {1}", item.Model, item.Year);
-                else if (combination == "YMOMA")
-                    Console.WriteLine("{0} \t\t {1} \t\t {2}", item.Year, item.Model, item.Make);
-            }
-
-            Console.ReadLine();
-        }
-
+        //2) Which Make appears the most?
         public static void MakeCount()
         {
             var makeCount = carList.GroupBy(g => g.Make)
@@ -169,6 +136,35 @@ namespace CarAppV2
             Console.ReadLine();
         }
 
+        //3) List of every car and its properties
+        //9) Show only the model names, and the year
+        //10) Show the year, model, and make
+        public static void ListCars(string combination)
+        {   
+            var resCars = carList.Select(c => c);
+
+            if (combination == "All")
+                Console.WriteLine("Make \t\t Model \t\t Year \t\t Engine Size");
+            else if (combination == "MOY")
+                Console.WriteLine("Model \t\t Year");
+            else if (combination == "YMOMA")
+                Console.WriteLine("Year \t\t Model \t\t Make");
+
+            foreach (var item in resCars)
+            {
+                if (combination == "All")
+                    Console.WriteLine("{0} \t\t {1} \t\t {2} \t\t {3}", item.Make, item.Model, item.Year, item.EngineSize);
+                else if (combination == "MOY")
+                    Console.WriteLine("{0} \t\t {1}", item.Model, item.Year);
+                else if (combination == "YMOMA")
+                    Console.WriteLine("{0} \t\t {1} \t\t {2}", item.Year, item.Model, item.Make);
+            }
+
+            Console.ReadLine();
+        }
+
+        //4) What's the largest engine?
+        //7) What's the newest year?
         public static void MaxValue(string columnName)
         {
             int max=0;
@@ -183,6 +179,7 @@ namespace CarAppV2
             Console.ReadLine();
         }
 
+        //5) What's the smallest engine?
         public static void MinValue(string columnName)
         {
             int min = 0;
@@ -197,14 +194,16 @@ namespace CarAppV2
             Console.ReadLine();
         }
 
+        //6) What's the average year?
         public static void AvgValue(string columnName)
         {
             double avg = carList.Select(a => a.Year).Average();
 
-            Console.WriteLine("Average value for column {0} is: "+ string.Format("{1:N}", columnName, avg));
+            Console.WriteLine("Average value for column {0} is: {1:F2}", columnName, avg);
             Console.ReadLine();
         }
 
+        //8) What's the total amount of cars?
         public static void CarCount()
         {
             int count = carList.Count();
@@ -212,6 +211,7 @@ namespace CarAppV2
             Console.ReadLine();
         }
 
+        //11) What would the model name be if printed in reverse?
         public static void ReverseModel()
         {
             var reverseModel = carList.Select(r => r.Model);
@@ -238,6 +238,7 @@ namespace CarAppV2
             Console.ReadLine();
         }
 
+        //12) Print out all the Chevy cars and all the properties, BUT, change Chevy to Chevrolet
         public static void SearchCar(string makeKeyName, string newValue)
         {
             var items = carList.Where(s => (s.Make == makeKeyName));                            
@@ -253,9 +254,10 @@ namespace CarAppV2
             foreach (var item in items)
                 item.Make = newValue;
 
-            ListCars("All");            
+            ListCars("All");
         }
 
+        //13) Print out the years but add a space between each number
         public static void YearSpace()
         {
             var yearSpace = carList.Select( y => y.Year);
@@ -269,9 +271,5 @@ namespace CarAppV2
 
             Console.ReadLine();
         }
-
-
-
-
     }
  }
