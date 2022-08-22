@@ -88,10 +88,11 @@ namespace CarAppV2
                     return true;
             }
         }
-
-        //1) Add a Car
+      
         public static void AddCar()
         {
+            //*--- 1) Add a Car ---*
+
             Console.WriteLine("Method to create a car");
 
             Console.Write("\r\nCar Company: ");
@@ -112,9 +113,10 @@ namespace CarAppV2
             ListCars("All");
         }
 
-        //2) Which Make appears the most?
+        
         public static void MakeCount()
         {
+            //*--- 2) Which Make appears the most? ---*
             var makeCount = carList.GroupBy(g => g.Make)
                                 .OrderByDescending(makeGroup => makeGroup.Count())
                                 .Select(
@@ -136,11 +138,12 @@ namespace CarAppV2
             Console.ReadLine();
         }
 
-        //3) List of every car and its properties
-        //9) Show only the model names, and the year
-        //10) Show the year, model, and make
         public static void ListCars(string combination)
-        {   
+        {
+            //*---  3) List of every car and its properties ---*
+            //*---  9) Show only the model names, and the year ---*
+            //*--- 10) Show the year, model, and make ---*
+
             var resCars = carList.Select(c => c);
 
             if (combination == "All")
@@ -163,11 +166,12 @@ namespace CarAppV2
             Console.ReadLine();
         }
 
-        //4) What's the largest engine?
-        //7) What's the newest year?
         public static void MaxValue(string columnName)
         {
-            int max=0;
+            //*--- 4) What's the largest engine? ---*
+            //*--- 7) What's the newest year? ---*
+
+            int max =0;
 
             if (columnName == "EngineSize")
                 max = carList.Select(m => m.EngineSize).Max();
@@ -178,10 +182,11 @@ namespace CarAppV2
 
             Console.ReadLine();
         }
-
-        //5) What's the smallest engine?
+        
         public static void MinValue(string columnName)
         {
+            //*--- //5) What's the smallest engine? ---*
+
             int min = 0;
 
             if (columnName == "EngineSize")
@@ -193,27 +198,30 @@ namespace CarAppV2
 
             Console.ReadLine();
         }
-
-        //6) What's the average year?
+        
         public static void AvgValue(string columnName)
         {
+            //*--- 6) What's the average year? ---*
+            
             double avg = carList.Select(a => a.Year).Average();
 
-            Console.WriteLine("Average value for column {0} is: {1:F2}", columnName, avg);
+            Console.WriteLine("Average value for column {0} is: {1:F0}", columnName, avg);
             Console.ReadLine();
         }
-
-        //8) What's the total amount of cars?
+        
         public static void CarCount()
         {
+            //*--- 8) What's the total amount of cars? ---*
+            
             int count = carList.Count();
             Console.WriteLine("Total amount of cars: " + count);
             Console.ReadLine();
         }
-
-        //11) What would the model name be if printed in reverse?
+        
         public static void ReverseModel()
         {
+            //*--- 11) What would the model name be if printed in reverse? ---*
+            
             var reverseModel = carList.Select(r => r.Model);
 
             Console.Clear();
@@ -237,10 +245,11 @@ namespace CarAppV2
 
             Console.ReadLine();
         }
-
-        //12) Print out all the Chevy cars and all the properties, BUT, change Chevy to Chevrolet
+        
         public static void SearchCar(string makeKeyName, string newValue)
         {
+            //*--- 12) Print out all the Chevy cars and all the properties, BUT, change Chevy to Chevrolet ---*
+           
             var items = carList.Where(s => (s.Make == makeKeyName));                            
 
             Console.WriteLine("BEFORE UPDATE");
@@ -256,10 +265,10 @@ namespace CarAppV2
 
             ListCars("All");
         }
-
-        //13) Print out the years but add a space between each number
+        
         public static void YearSpace()
         {
+            //*--- 13) Print out the years but add a space between each number ---*
             var yearSpace = carList.Select( y => y.Year);
 
             foreach (var item in yearSpace)

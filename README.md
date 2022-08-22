@@ -19,8 +19,7 @@
     - Pontiac FireBird 1967 400
     - Dodge Challenger 1970 427
     - Ford Pinto 1976 208
-    - Alfa Romeo Tudela 2000 200
-    
+    - Alfa Romeo Tudela 2000 200  
 
 * Write to console:
     - Which make appears the most?
