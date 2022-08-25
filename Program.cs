@@ -41,6 +41,9 @@ namespace CarAppV2
             Console.WriteLine("12) What would the model name be if printed in reverse?");
             Console.WriteLine("13) Print out all the Chevy cars and all the properties, BUT, change Chevy to Chevrolet");
             Console.WriteLine("14) Print out the years but add a space between each number");
+            Console.WriteLine("15) Print out the first car on the list");
+            Console.WriteLine("16) Print out the top 5 cars on the list");
+            Console.WriteLine("17) Print out the last car on the list");
             Console.WriteLine(" 0) Exit");
             Console.Write("\r\nSelect an option: ");
 
@@ -94,6 +97,15 @@ namespace CarAppV2
                 case "14":
                     YearSpace();
                     return true;
+                case "15":
+                    topCars("TOP1");
+                    return true;
+                case "16":
+                    topCars("TOP5");
+                    return true;
+                case "17":
+                    topCars("BOTTOM1");
+                    return true;
                 case "0":
                     return false;
                 default:
@@ -111,27 +123,27 @@ namespace CarAppV2
             Console.WriteLine("Add a car to the database");
 
             Console.Write("\r\nCar Company: ");
-            make = Console.ReadLine();
+            make = Console.ReadLine()!;
 
-            while (!System.Text.RegularExpressions.Regex.IsMatch(make, @"^[a-zA-Z]+$"))            
+            while (!System.Text.RegularExpressions.Regex.IsMatch(make, @"^[a-zA-Z]+$")!)            
             {
                 Console.Write("The Company accepts only alphabetical characters");
                 Console.Write("\r\nCar Company: ");
-                make = Console.ReadLine();
+                make = Console.ReadLine()!;
             }
 
             Console.Write("\r\nCar Model: ");
-            model = Console.ReadLine();
-            
-            while (!(model.All(c => Char.IsLetterOrDigit(c))))
+            model = Console.ReadLine()!;
+                       
+            while (!model.All(c => Char.IsLetterOrDigit(c)) || model=="" )
             {
                 Console.Write("The model does not allow special characters");
                 Console.Write("\r\nCar Model: ");
-                model = Console.ReadLine();
+                model = Console.ReadLine()!;
             }
 
             Console.Write("\r\nCar Year: ");
-            s_year = Console.ReadLine();
+            s_year = Console.ReadLine()!;
 
             bool isNumber = int.TryParse(s_year, out year);
 
@@ -139,19 +151,19 @@ namespace CarAppV2
             {
                 Console.WriteLine("The Year value should be a valid number between [1900-9999]");
                 Console.Write("\r\nCar Year: ");
-                s_year = Console.ReadLine();
+                s_year = Console.ReadLine()!;
 
                 isNumber = int.TryParse(s_year, out year);
             }
 
             Console.Write("\r\nCar Engine Size: ");
-            s_engineSize = Console.ReadLine();
+            s_engineSize = Console.ReadLine()!;
 
             while (!(int.TryParse(s_engineSize, out engineSize)))
             {
                 Console.WriteLine("The Engine size value should be a valid number");
                 Console.Write("\r\nCar Engine Size: ");
-                s_engineSize = Console.ReadLine();
+                s_engineSize = Console.ReadLine()!;
             }
 
             carList.Add(
@@ -314,11 +326,11 @@ namespace CarAppV2
         {
             //*--- 13) Print out all the Chevy cars and all the properties, BUT, change Chevy to Chevrolet ---*
            
-            var items = carList.Where(car => (car.Make == search_value)).ToList();                            
-            
+            var items = carList.Where(car => (car.Make == search_value)).ToList();
+
             Console.WriteLine("Make \t\t\t Model \t\t\t Year \t\t Engine Size");
             foreach (var item in items)
-                Console.WriteLine("{0} \t\t {1} \t\t {2} \t\t {3}",item.Make.PadRight(10), item.Model.PadRight(10), item.Year, item.EngineSize);
+                Console.WriteLine("{0} \t\t {1} \t\t {2} \t\t {3}", item.Make.PadRight(10), item.Model.PadRight(10), item.Year, item.EngineSize);
         }
 
         public static void UpdateCar(string currentValue, string newValue)
@@ -344,6 +356,27 @@ namespace CarAppV2
             }
 
             Console.ReadLine();
+        }
+
+        public static void topCars(string topRequest)
+        {
+            List<Car> topCar = carList;
+
+            if (topRequest == "TOP1")
+                topCar = carList.Take(1).ToList();            
+            else if (topRequest == "TOP5")
+                topCar = carList.Take(5).ToList();            
+            else if (topRequest == "BOTTOM1")
+                topCar = carList.TakeLast(1).ToList();            
+
+            Console.WriteLine("Make \t\t\t Model \t\t\t Year \t\t Engine Size");
+            foreach (var item in topCar)
+            {
+                Console.WriteLine("{0} \t\t {1} \t\t {2} \t\t {3}", item.Make.PadRight(10), item.Model.PadRight(10), item.Year, item.EngineSize);
+            }
+
+            Console.ReadLine();
+            
         }
     }
  }
